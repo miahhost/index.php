@@ -1,19 +1,428 @@
-<?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!--[ Bing Webmaster verify code  ]-->
-<meta name="msvalidate.01" content="E581B54AA6617AD5651B9A543E4FB60E" />
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MiahHost - Premium Web Hosting</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<style>
+/* **CSS for the Hero Section based on the images**
+    - Blue background: #0A183D
+    - Highlight color (200X Faster): #FFCC00 (Yellow/Gold)
+    - Discount banner style
+    - Domain search bar with orange button
+    - TLD boxes with prices, in a grid format
+*/
 
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title><data:blog.pageTitle/></title>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+/* ===== NEW HEADER & NAVIGATION ===== */
+.header {
+    background: #0A183D;
+    padding: 15px 0;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s;
+}
 
-<b:skin><![CDATA[
-/* ------------------------------------------------------------------ */
-/* *** GLOBAL AND DARK MODE CSS (সংশোধিত) *** */
-/* ------------------------------------------------------------------ */
+body.dark-mode .header {
+    background: #1a1a2e;
+}
+
+.header-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+}
+
+/* Logo moved to left */
+.logo-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.logo {
+    font-size: 1.8rem;
+    font-weight: 800;
+    color: white;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+}
+
+/* Changed from fa-server to fa-cloud */
+.logo i {
+    color: #FFCC00;
+    margin-right: 10px;
+}
+
+/* Desktop Navigation */
+.nav-menu {
+    display: flex;
+    list-style: none;
+    gap: 25px;
+    margin-left: 40px;
+}
+
+.nav-menu a {
+    color: white;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.95rem;
+    transition: color 0.3s;
+    padding: 8px 0;
+    position: relative;
+}
+
+.nav-menu a:hover {
+    color: #FFCC00;
+}
+
+.nav-menu a::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: #FFCC00;
+    transition: width 0.3s;
+}
+
+.nav-menu a:hover::after {
+    width: 100%;
+}
+
+.header-right {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+/* User Login Icon - Direct link to login/register - Fixed to show next to dark mode */
+.user-login {
+    display: flex;
+    align-items: center;
+}
+
+.user-login-btn {
+    background: rgba(255, 255, 255, 0.1);
+    border: none;
+    color: white;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    transition: all 0.3s;
+    text-decoration: none;
+}
+
+.user-login-btn:hover {
+    background: rgba(255, 204, 0, 0.2);
+    transform: translateY(-2px);
+    color: #FFCC00;
+}
+
+.user-login-btn i {
+    margin-right: 0;
+}
+
+/* Dark Mode Toggle Switch - Updated to look like a switch */
+.theme-toggle {
+    display: flex;
+    align-items: center;
+}
+
+.theme-switch {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 30px;
+}
+
+.theme-switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.theme-slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #2a4b8d;
+    transition: .4s;
+    border-radius: 34px;
+}
+
+.theme-slider:before {
+    position: absolute;
+    content: "";
+    height: 22px;
+    width: 22px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    transition: .4s;
+    border-radius: 50%;
+}
+
+.theme-switch input:checked + .theme-slider {
+    background-color: #FFCC00;
+}
+
+.theme-switch input:checked + .theme-slider:before {
+    transform: translateX(30px);
+}
+
+/* Moon and Sun icons inside the switch */
+.theme-slider .moon-icon,
+.theme-slider .sun-icon {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 14px;
+    color: white;
+    transition: opacity 0.3s;
+}
+
+.theme-slider .moon-icon {
+    left: 8px;
+    opacity: 1;
+}
+
+.theme-slider .sun-icon {
+    right: 8px;
+    opacity: 0.5;
+}
+
+.theme-switch input:checked + .theme-slider .moon-icon {
+    opacity: 0.5;
+}
+
+.theme-switch input:checked + .theme-slider .sun-icon {
+    opacity: 1;
+}
+
+/* Mobile Menu Button on LEFT side */
+.hamburger {
+    display: none;
+    flex-direction: column;
+    cursor: pointer;
+    gap: 4px;
+    margin-right: 15px;
+}
+
+.hamburger span {
+    width: 25px;
+    height: 3px;
+    background: white;
+    border-radius: 2px;
+    transition: 0.3s;
+}
+
+/* Mobile Menu Overlay */
+.mobile-menu-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    z-index: 9999;
+    display: none;
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.mobile-menu-overlay.active {
+    display: block;
+    opacity: 1;
+}
+
+.mobile-menu-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 280px;
+    height: 100%;
+    background: linear-gradient(135deg, #0A183D 0%, #1a2a6c 100%);
+    padding: 20px;
+    transform: translateX(-100%);
+    transition: transform 0.3s;
+    z-index: 10000;
+    overflow-y: auto;
+}
+
+body.dark-mode .mobile-menu-container {
+    background: linear-gradient(135deg, #1a1a2e 0%, #2a4b8d 100%);
+}
+
+.mobile-menu-container.active {
+    transform: translateX(0);
+}
+
+.mobile-menu-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.mobile-logo {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: white;
+}
+
+.mobile-menu-close {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 1.8rem;
+    cursor: pointer;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    transition: background 0.3s;
+}
+
+.mobile-menu-close:hover {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.mobile-nav-menu {
+    list-style: none;
+}
+
+.mobile-nav-menu li {
+    margin-bottom: 15px;
+}
+
+.mobile-nav-menu a {
+    color: white;
+    text-decoration: none;
+    font-size: 1.1rem;
+    font-weight: 600;
+    padding: 12px 15px;
+    border-radius: 8px;
+    display: block;
+    transition: all 0.3s;
+    background: rgba(255, 255, 255, 0.05);
+}
+
+/* Multi-color menu items */
+.mobile-nav-menu li:nth-child(1) a:hover { background: linear-gradient(135deg, #FF6B6B 0%, #FF8E53 100%); }
+.mobile-nav-menu li:nth-child(2) a:hover { background: linear-gradient(135deg, #4ECDC4 0%, #44A08D 100%); }
+.mobile-nav-menu li:nth-child(3) a:hover { background: linear-gradient(135deg, #FFD166 0%, #FF9A3D 100%); }
+.mobile-nav-menu li:nth-child(4) a:hover { background: linear-gradient(135deg, #06D6A0 0%, #1B9AAA 100%); }
+.mobile-nav-menu li:nth-child(5) a:hover { background: linear-gradient(135deg, #118AB2 0%, #073B4C 100%); }
+.mobile-nav-menu li:nth-child(6) a:hover { background: linear-gradient(135deg, #EF476F 0%, #9D4EDD 100%); }
+
+.mobile-user-account {
+    margin-top: 30px;
+    padding-top: 20px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.mobile-user-account a {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: white;
+    text-decoration: none;
+    padding: 12px 15px;
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.05);
+    transition: all 0.3s;
+}
+
+.mobile-user-account a:hover {
+    background: rgba(255, 204, 0, 0.2);
+    color: #FFCC00;
+}
+
+/* Floating Support Buttons (Bottom RIGHT) */
+.floating-support {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    z-index: 1000;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.support-btn {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    color: white;
+    text-decoration: none;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s;
+    position: relative;
+}
+
+.support-btn:hover {
+    transform: translateY(-5px) scale(1.1);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+}
+
+.support-btn.whatsapp {
+    background: linear-gradient(135deg, #25D366 0%, #128C7E 100%);
+}
+
+.support-btn.telegram {
+    background: linear-gradient(135deg, #0088cc 0%, #005f8a 100%);
+}
+
+.support-tooltip {
+    position: absolute;
+    right: 70px;
+    background: rgba(0, 0, 0, 0.8);
+    color: white;
+    padding: 6px 12px;
+    border-radius: 6px;
+    font-size: 0.9rem;
+    white-space: nowrap;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s;
+    pointer-events: none;
+}
+
+.support-btn:hover .support-tooltip {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* Adjust hero section for fixed header */
+.new-hero {
+    padding-top: 100px; /* Add space for fixed header */
+}
+
+/* Rest of your existing CSS remains the same */
 * {
     margin: 0;
     padding: 0;
@@ -29,453 +438,603 @@ body {
     flex-direction: column;
     transition: background-color 0.3s, color 0.3s;
 }
-/* Dark Mode Styles */
 body.dark-mode {
     background-color: #1a1a2e;
     color: #e6e6e6;
 }
-/* Dark Mode adjustments for new components */
-body.dark-mode .top-bar-new {
-    background-color: #2a334d; /* Darker top bar in dark mode */
-    box-shadow: 0 2px 4px rgba(0,0,0,0.4);
+.new-hero {
+    /* Deep blue background from the image */
+    background-color: #0A183D; 
+    color: white;
+    padding: 60px 20px 80px;
+    text-align: center;
 }
-body.dark-mode .top-bar-new .logo a {
-    color: #e6e6e6;
+.hero-container {
+    max-width: 800px; /* Slightly wider for more TLDs */
+    margin: 0 auto;
 }
-body.dark-mode .hamburger-menu-icon span {
-    background: #e6e6e6;
-}
-body.dark-mode .dark-mode-switch .fa-sun,
-body.dark-mode .dark-mode-switch .fa-moon {
-    color: #e6e6e6;
-}
-
-/* ------------------------------------------------------------------ */
-/* *** নতুন টপবার (HEADER) CSS - সাদা ব্যাকগ্রাউন্ড *** */
-/* ------------------------------------------------------------------ */
-.top-bar-new {
-    /* নির্দেশ অনুযায়ী: সাদা ব্যাকগ্রাউন্ড */
-    background-color: white; 
-    padding: 10px 20px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-    position: sticky;
-    top: 0;
-    z-index: 1000;
-}
-.top-bar-left {
-    display: flex;
-    align-items: center;
-    gap: 15px; /* Added space between Hamburger and Logo */
-}
-.top-bar-new .logo a {
-    color: #9333ea; 
-    font-size: 1.8rem;
-    font-weight: 800;
-    text-decoration: none;
-    display: flex;
-    align-items: center;
-}
-.top-bar-new .logo a span {
-    color: #3b82f6;
-    margin-left: 5px;
-}
-.top-bar-right {
-    display: flex;
-    align-items: center;
-    gap: 15px;
-}
-/* Hamburger Icon Styling (বাম দিকে) */
-.hamburger-menu-icon {
-    /* শুধুমাত্র ছোট স্ক্রিনে দেখানোর জন্য */
-    display: none; 
-    width: 30px;
-    height: 20px;
-    position: relative;
-    cursor: pointer;
-    z-index: 1002;
-}
-.hamburger-menu-icon span {
-    display: block;
-    position: absolute;
-    height: 3px;
-    width: 100%;
-    /* সাদা টপবারের জন্য কালো রং */
-    background: #333; 
-    border-radius: 5px;
-    left: 0;
-    transform: rotate(0deg);
-    transition: .25s ease-in-out;
-}
-/* Hamburger icon bar positioning */
-.hamburger-menu-icon span:nth-child(1) { top: 0px; }
-.hamburger-menu-icon span:nth-child(2) { top: 8px; }
-.hamburger-menu-icon span:nth-child(3) { top: 16px; }
-
-/* Menu Open state animation (Cross icon) */
-.hamburger-menu-icon.open span {
-    /* যখন সাইডবার খোলা থাকবে তখন হ্যামবার্গার আইকন সাদা হয়ে যাবে */
-    background: white; 
-}
-.hamburger-menu-icon.open span:nth-child(1) {
-    top: 8px;
-    transform: rotate(135deg);
-}
-.hamburger-menu-icon.open span:nth-child(2) {
-    opacity: 0;
-    left: 60px; /* Hide the middle bar */
-}
-.hamburger-menu-icon.open span:nth-child(3) {
-    top: 8px;
-    transform: rotate(-135deg);
-}
-
-/* Dark Mode Toggle Switch Styling */
-.dark-mode-switch {
-    display: flex;
-    align-items: center;
-    position: relative;
-}
-.dark-mode-switch .fa-sun,
-.dark-mode-switch .fa-moon {
-    color: #333; /* সাদা টপবারের জন্য কালো রং */
-    margin: 0 5px;
-}
-.switch {
-    position: relative;
+.discount-banner {
     display: inline-block;
-    width: 40px;
-    height: 20px;
-}
-.switch input {
-    opacity: 0;
-    width: 0;
-    height: 0;
-}
-.slider {
-    position: absolute;
-    cursor: pointer;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: #ccc;
-    transition: .4s;
-    border-radius: 20px;
-}
-.slider:before {
-    position: absolute;
-    content: "";
-    height: 16px;
-    width: 16px;
-    left: 2px;
-    bottom: 2px;
-    background-color: white;
-    transition: .4s;
-    border-radius: 50%;
-}
-input:checked + .slider {
-    background-color: #F97316; /* Orange color when ON */
-}
-input:checked + .slider:before {
-    transform: translateX(20px);
-}
-
-/* ------------------------------------------------------------------ */
-/* *** সাইডবার (SIDEBAR) CSS - ক্রস বাটন সহ সংশোধিত *** */
-/* ------------------------------------------------------------------ */
-.sidebar-new {
-    height: 100%;
-    width: 0;
-    position: fixed;
-    z-index: 1001;
-    top: 0;
-    left: 0; /* বাম দিক থেকে আসবে */
-    /* সাইডবারের গ্র্যাডিয়েন্ট রং */
-    background: linear-gradient(180deg, #9333ea 0%, #3b82f6 100%); 
-    overflow-x: hidden;
-    transition: 0.5s;
-    padding-top: 60px; /* মেনুর জন্য জায়গা */
-    box-shadow: 2px 0 5px rgba(0,0,0,0.5);
-}
-.sidebar-new.open {
-    width: 250px;
-}
-
-/* ক্রস বাটন স্টাইল */
-.sidebar-new .close-btn {
-    position: absolute;
-    top: 10px;
-    right: 25px;
-    font-size: 36px;
-    margin-left: 50px;
-    color: white;
-    background: none;
-    border: none;
-    cursor: pointer;
-    font-weight: 300;
-    line-height: 1;
-    padding: 5px 10px;
-    transition: color 0.3s;
-}
-.sidebar-new .close-btn:hover {
-    color: #FFCC00;
-}
-
-.sidebar-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px 20px;
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-}
-.sidebar-new .logo {
-    color: white;
-    font-size: 1.8rem;
-    font-weight: 800;
-    /* লোগো এবং ক্লোজ বাটনকে আলাদা রাখতে */
-    padding-left: 20px; 
-}
-
-.sidebar-new nav ul {
-    list-style-type: none;
-    padding: 0;
-    /* কোনো অতিরিক্ত বর্ডার বা মার্জিন নেই */
-}
-.sidebar-new nav ul li {
-    /* তালিকা আইটেমের নিচে কোনো বর্ডার নেই */
-    border-bottom: none; 
-}
-
-.sidebar-new nav ul li a {
-    padding: 15px 25px;
-    text-decoration: none;
-    font-size: 1.1rem;
-    color: white;
-    display: flex;
-    align-items: center;
-    transition: 0.3s;
-    font-weight: 500;
-}
-.sidebar-new nav ul li a i {
-    margin-right: 15px;
-    font-size: 1.2rem;
-}
-.sidebar-new nav ul li a:hover,
-.sidebar-new nav ul li.active a {
-    background-color: rgba(0, 0, 0, 0.2);
-    border-left: 5px solid #FFCC00; 
-    padding-left: 20px;
-}
-
-/* ------------------------------------------------------------------ */
-/* *** মোবাইল রেসপন্সিভনেস (Hamburger Visibility) *** */
-/* ------------------------------------------------------------------ */
-@media(max-width:768px){
-    /* Show hamburger icon on smaller screens */
-    .hamburger-menu-icon {
-        display: block;
-    }
-    .top-bar-new .logo a {
-        font-size: 1.5rem;
-    }
-    .sidebar-new.open {
-        width: 80%; /* মোবাইল স্ক্রিনে 80% জায়গা নেবে */
-        max-width: 300px;
-    }
-}
-/* ------------------------------------------------------------------ */
-/* *** প্যাকেজ স্টাইল (New Package Styles) *** */
-/* ------------------------------------------------------------------ */
-/* Package Header Styles */
-.package-header {
-    margin-bottom: 20px;
-    padding-bottom: 15px;
-    border-bottom: 2px solid #eee; /* একটি হালকা লাইন যোগ করা হয়েছে */
-}
-.package-name {
-    /* প্যাকেজের নাম আরও বড় করা হয়েছে */
-    font-size: 1.8rem; 
-    font-weight: 700;
-    margin-bottom: 5px;
-    color: #1a2a6c;
-}
-.package-price {
-    /* প্রাইস সবচেয়ে বড় ও হাইলাইট করা হয়েছে */
-    font-size: 2.8rem; 
-    font-weight: 800;
-    color: #9333ea; /* বেগুনী রং ব্যবহার করা হয়েছে */
-}
-.package-period {
+    /* Darker blue background for the banner */
+    background-color: rgba(45, 59, 93, 0.7); 
+    padding: 8px 15px;
+    border-radius: 50px;
+    margin-bottom: 30px;
     font-size: 0.9rem;
-    color: #6c757d;
-    margin-top: -5px;
-    display: block;
+    font-weight: 600;
 }
-/* Dark Mode Price adjustments */
-body.dark-mode .package-name {
-    color: #4d9aff;
+.discount-banner .fa-bell {
+    color: #38BDF8;
+    margin-right: 8px;
 }
-body.dark-mode .package-price {
-    color: #ffcc00; /* ডার্ক মোডে হলুদ হাইলাইট */
+.new-hero h1 {
+    font-size: 3rem;
+    font-weight: 800;
+    margin-bottom: 10px;
+    color: #fff;
 }
-/* ------------------------------------------------------------------ */
-/* *** ফ্লোটিং সাপোর্ট বাটন (Floating Support Buttons) *** */
-/* ------------------------------------------------------------------ */
-.floating-support-buttons {
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    z-index: 1050; /* অন্য কিছুর উপরে রাখার জন্য */
+.new-hero .highlight {
+    /* Highlight color (Yellow/Gold) for "200X Faster" */
+    color: #FFCC00; 
+}
+.new-hero h2 {
+    font-size: 1.5rem;
+    font-weight: 400;
+    color: #fff; /* Changed to white for better contrast as in image */
+    margin-bottom: 40px;
+    min-height: 2.5rem;
+}
+.typing-words-container {
+    display: inline-block;
+}
+.typing-words {
+    color: #FFCC00; /* Typing word color */
+    font-weight: 600;
+    border-right: 3px solid #FFCC00;
+    animation: new-blink 0.7s infinite;
+    padding-right: 2px;
+}
+@keyframes new-blink {
+    0%, 100% { border-color: transparent; }
+    50% { border-color: #FFCC00; }
+}
+.domain-search-form-new {
     display: flex;
-    flex-direction: column;
-    gap: 10px;
+    margin-bottom: 30px;
+    background: white;
+    border-radius: 6px;
+    padding: 5px;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
 }
-.support-button {
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
+.domain-search-input-new {
+    flex: 1;
+    border: none;
+    outline: none;
+    padding: 10px 15px;
+    font-size: 1rem;
+    background: transparent;
+    color: #333;
+}
+.domain-search-button-new {
+    /* Orange color for the search button */
+    background: #F97316; 
+    color: white;
+    border: none;
+    padding: 12px 25px;
+    border-radius: 4px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+.domain-search-button-new:hover {
+    background: #EA580C;
+}
+.domain-tlds-new {
+    /* Grid layout for TLD boxes */
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+    max-width: 650px; /* Adjusted to fit the TLD boxes nicely */
+    margin: 0 auto 30px auto;
+}
+.domain-tld-new {
+    /* Darker blue/grey for TLD box background */
+    background: #1E293B; 
+    padding: 15px 10px;
+    border-radius: 8px;
+    transition: background 0.3s;
+    text-align: center;
+    cursor: pointer;
+}
+.domain-tld-new:hover {
+    background: #334155;
+}
+.domain-tld-new .tld-name {
+    display: block;
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 5px;
+    color: white;
+}
+.domain-tld-new .tld-price {
+    display: block;
+    font-size: 1.2rem;
+    /* Yellow/Gold color for price */
+    color: #FFCC00; 
+}
+
+/* Updated Get Started and Compare Plans buttons style based on image */
+.hero-buttons {
     display: flex;
     justify-content: center;
-    align-items: center;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-    font-size: 1.8rem;
-    color: white;
-    transition: transform 0.3s, box-shadow 0.3s;
+    gap: 20px;
+    margin-top: 20px;
+}
+
+/* *** UPDATED: Get Started Button (Yellow Background, BLUE Text) *** */
+.get-started-btn {
+    /* Yellow background color */
+    background: #FFCC00; 
+    /* **FORCED: Text color set to BLUE** */
+    color: #2575fc !important; 
+    border: none;
+    padding: 15px 40px;
+    font-size: 1.1rem;
+    font-weight: 700;
+    border-radius: 8px; /* Slightly squared off corners */
+    cursor: pointer;
+    transition: all 0.3s;
     text-decoration: none;
+    display: inline-block;
+    flex-grow: 1;
+    max-width: 250px;
 }
-.support-button:hover {
-    transform: scale(1.1);
-    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+.get-started-btn:hover {
+    background: #ffd93d;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 10px rgba(0,0,0,0.2);
 }
-.whatsapp-button {
-    background-color: #25d366; /* WhatsApp Green */
-}
-.telegram-button {
-    background-color: #0088cc; /* Telegram Blue */
-}
-/* ------------------------------------------------------------------ */
-/* *** আপনার দেওয়া অন্যান্য বিদ্যমান CSS কোড (পরিবর্তিত/অপরিবর্তিত) *** */
-/* ------------------------------------------------------------------ */
-.new-hero { background-color: #0A183D; color: white; padding: 60px 20px 80px; text-align: center; }
-.hero-container { max-width: 800px; margin: 0 auto; }
-.discount-banner { display: inline-block; background-color: rgba(45, 59, 93, 0.7); padding: 8px 15px; border-radius: 50px; margin-bottom: 30px; font-size: 0.9rem; font-weight: 600; }
-.discount-banner .fa-bell { color: #38BDF8; margin-right: 8px; }
-.new-hero h1 { font-size: 3rem; font-weight: 800; margin-bottom: 10px; color: #fff; }
-.new-hero .highlight { color: #FFCC00; }
-.new-hero h2 { font-size: 1.5rem; font-weight: 400; color: #fff; margin-bottom: 40px; min-height: 2.5rem; }
-.typing-words { color: #FFCC00; font-weight: 600; border-right: 3px solid #FFCC00; animation: new-blink 0.7s infinite; padding-right: 2px; }
-@keyframes new-blink { 0%, 100% { border-color: transparent; } 50% { border-color: #FFCC00; } }
-.domain-search-form-new { display: flex; margin-bottom: 30px; background: white; border-radius: 6px; padding: 5px; max-width: 600px; margin-left: auto; margin-right: auto; box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
-.domain-search-input-new { flex: 1; border: none; outline: none; padding: 10px 15px; font-size: 1rem; background: transparent; color: #333; }
-.domain-search-button-new { background: #F97316; color: white; border: none; padding: 12px 25px; border-radius: 4px; font-size: 1rem; font-weight: 600; cursor: pointer; transition: background 0.3s; }
-.domain-tlds-new { display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; max-width: 650px; margin: 0 auto 30px auto; }
-.domain-tld-new { background: #1E293B; padding: 15px 10px; border-radius: 8px; transition: background 0.3s; text-align: center; cursor: pointer; }
-.domain-tld-new .tld-name { display: block; font-size: 1.5rem; font-weight: 600; color: white; }
-.domain-tld-new .tld-price { display: block; font-size: 1.2rem; color: #FFCC00; }
-.hero-buttons { display: flex; justify-content: center; gap: 20px; margin-top: 20px; }
-.get-started-btn { background: #FFCC00; color: #2575fc !important; border: none; padding: 15px 40px; font-size: 1.1rem; font-weight: 700; border-radius: 8px; cursor: pointer; transition: all 0.3s; text-decoration: none; display: inline-block; flex-grow: 1; max-width: 250px; }
-.compare-plans-btn { background: #F97316; color: white !important; border: none; padding: 15px 40px; font-size: 1.1rem; font-weight: 700; border-radius: 8px; cursor: pointer; transition: all 0.3s; text-decoration: none; display: inline-block; flex-grow: 1; max-width: 250px; }
-.packages { padding: 70px 30px; background: #f5f7fa; text-align: center; transition: background-color 0.3s; }
-body.dark-mode .packages { background: #1a1a2e; }
-.packages h2 { font-size: 2.5rem; margin-bottom: 50px; color: #1a2a6c; }
-body.dark-mode .packages h2 { color: #4d9aff; }
-.package-container { display: flex; justify-content: center; flex-wrap: wrap; gap: 30px; max-width: 1200px; margin: 0 auto; }
-.package { background: white; border-radius: 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); padding: 30px; width: 280px; transition: transform 0.3s, background-color 0.3s, color 0.3s; position: relative; }
-body.dark-mode .package { background: #16213e; color: #e6e6e6; box-shadow: 0 5px 15px rgba(0,0,0,0.3); }
-body.dark-mode .package-header { border-bottom: 2px solid #2d3746; } /* Updated line */
-body.dark-mode .package-period { color: #a0a0a0; }
-.package-features { text-align: left; margin-bottom: 30px; }
-.package-features ul { list-style: none; }
-.package-features li { padding: 8px 0; display: flex; align-items: center; }
-.package-features li i { color: #25d366; margin-right: 10px; }
-.view-plans-btn { background: #ffcc00; color: #2575fc; border: none; padding: 12px 30px; border-radius: 5px; font-weight: 600; cursor: pointer; transition: background 0.3s; width: 100%; text-decoration: none; display: block; }
 
-.feature-highlights { padding: 70px 30px; background: #e9ecef; text-align: center; transition: background-color 0.3s; }
-body.dark-mode .feature-highlights { background: #252a46; }
-body.dark-mode .feature-highlights h2 { color: #4d9aff; }
-body.dark-mode .feature-highlights p { color: #a0a0a0; }
-.features-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; max-width: 1200px; margin: 0 auto; }
-.feature-item { background: #ffffff; padding: 40px 20px; border-radius: 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.08); transition: transform 0.3s, box-shadow 0.3s; }
-body.dark-mode .feature-item { background: #1a1a2e; box-shadow: 0 5px 15px rgba(0,0,0,0.3); }
-.feature-item i { font-size: 3rem; color: #2575fc; margin-bottom: 20px; }
-body.dark-mode .feature-item i { color: #4d9aff; }
-body.dark-mode .feature-item h3 { color: #e6e6e6; }
-body.dark-mode .feature-item p { color: #b0b0b0; }
-
-.bdix-section { padding: 70px 30px; background: #f5f7fa; transition: background-color 0.3s; }
-body.dark-mode .bdix-section { background: #16213e; }
-.bdix-container { max-width: 1200px; margin: 0 auto; display: flex; align-items: center; gap: 50px; flex-wrap: wrap; }
-.bdix-image, .bdix-content { flex: 1; min-width: 300px; }
-.bdix-image img { max-width: 100%; height: auto; border-radius: 10px; box-shadow: 0 10px 20px rgba(0,0,0,0.1); }
-body.dark-mode .bdix-content h2 { color: #4d9aff; }
-body.dark-mode .bdix-content p { color: #b0b0b0; }
-
-/* *** Our Technology Section (মাঝখানে লেখা) *** */
-.technology-section { 
-    padding: 70px 30px; 
-    background-color: #f8f9fa; 
-    transition: background-color: 0.3s;
-    text-align: center; /* লেখা মাঝখানে */
+/* *** UPDATED: Compare Plans Button (Orange Background, White Text) *** */
+.compare-plans-btn {
+    /* Orange background color */
+    background: #F97316; 
+    /* **FORCED: Text color set to White** */
+    color: white !important; 
+    border: none;
+    padding: 15px 40px;
+    font-size: 1.1rem;
+    font-weight: 700;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s;
+    text-decoration: none;
+    display: inline-block;
+    flex-grow: 1;
+    max-width: 250px;
 }
-body.dark-mode .technology-section { background-color: #252a46; }
-.tech-grid { display: flex; justify-content: center; gap: 30px; flex-wrap: wrap; }
-.tech-card { background-color: #ffffff; padding: 30px; border-radius: 10px; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); transition: transform 0.3s ease, background-color 0.3s; width: 300px; }
-body.dark-mode .tech-card { background-color: #1a1a2e; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3); }
-body.dark-mode .tech-card i { color: #4d9aff; }
-body.dark-mode .tech-card h3 { color: #e6e6e6; }
-body.dark-mode .tech-card p { color: #b0b0b0; }
+.compare-plans-btn:hover {
+    background: #EA580C; /* Slightly darker orange on hover */
+    transform: translateY(-2px);
+    box-shadow: 0 5px 10px rgba(0,0,0,0.2);
+}
 
-/* *** FAQ Section (মাঝখানে লেখা) *** */
-.faq-section { 
-    padding: 70px 30px; 
-    background-color: #ffffff; 
+/* --- Existing CSS (omitted for brevity, assume it's here) --- */
+
+.packages {
+    padding: 70px 30px;
+    background: #f5f7fa;
+    text-align: center;
     transition: background-color 0.3s;
-    text-align: center; /* লেখা মাঝখানে */
 }
-body.dark-mode .faq-section { background-color: #1a1a2e; }
-body.dark-mode .faq-section .section-title { color: #e6e6e6; }
-.faq-item { border-bottom: 1px solid #dee2e6; margin-bottom: 10px; max-width: 800px; margin: 0 auto 10px auto; }
-body.dark-mode .faq-item { border-bottom: 1px solid #2d3746; }
-.faq-question { background-color: #f1f1f1; color: #343a40; cursor: pointer; padding: 18px; width: 100%; border: none; text-align: left; outline: none; font-size: 1.1rem; transition: background-color 0.3s ease; }
-body.dark-mode .faq-question { background-color: #2d3746; color: #e6e6e6; }
-.faq-question:hover { background-color: #e2e6ea; }
-body.dark-mode .faq-question:hover { background-color: #3b4554; }
-.faq-answer { padding: 0 18px; background-color: #f8f9fa; max-height: 0; overflow: hidden; transition: max-height 0.2s ease-out; text-align: left; }
-body.dark-mode .faq-answer { background-color: #16213e; }
-.faq-answer.active { padding: 18px; }
-
-/* *** Ratings Section (মাঝখানে লেখা) *** */
-.ratings-section { 
-    padding: 70px 30px; 
-    background-color: #e9ecef;
-    transition: background-color 0.3s;
-    text-align: center; /* লেখা মাঝখানে */
+body.dark-mode .packages {
+    background: #1a1a2e;
 }
-body.dark-mode .ratings-section { background-color: #252a46; }
-body.dark-mode .ratings-section .section-title { color: #e6e6e6; }
-.rating-slider {
+.packages h2 {
+    font-size: 2.5rem;
+    margin-bottom: 50px;
+    color: #1a2a6c;
+}
+body.dark-mode .packages h2 {
+    color: #4d9aff;
+}
+.package-container {
     display: flex;
-    justify-content: center; /* Rating Cards মাঝখানে */
+    justify-content: center;
+    flex-wrap: wrap;
     gap: 30px;
-    flex-wrap: wrap; 
     max-width: 1200px;
     margin: 0 auto;
 }
-.rating-card { background-color: #ffffff; padding: 30px; border-radius: 10px; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); width: 400px; }
-body.dark-mode .rating-card { background-color: #1a1a2e; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3); }
-body.dark-mode .rating-card p { color: #b0b0b0; }
-body.dark-mode .rating-card h4 { color: #e6e6e6; }
+.package {
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    padding: 30px;
+    width: 280px;
+    transition: transform 0.3s, background-color 0.3s, color 0.3s;
+    position: relative;
+}
+body.dark-mode .package {
+    background: #16213e;
+    color: #e6e6e6;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+}
+.package:hover {
+    transform: translateY(-10px);
+}
+.package-header {
+    border-bottom: 1px solid #eee;
+    padding-bottom: 20px;
+    margin-bottom: 20px;
+}
+body.dark-mode .package-header {
+    border-bottom: 1px solid #2d3746;
+}
+.package-name {
+    font-size: 1.8rem;
+    color: #1a2a6c;
+    margin-bottom: 10px;
+}
+body.dark-mode .package-name {
+    color: #4d9aff;
+}
+.package-price {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #2575fc;
+    margin-bottom: 5px;
+}
+body.dark-mode .package-price {
+    color: #66b3ff;
+}
+.package-period {
+    color: #666;
+    font-size: 1rem;
+}
+body.dark-mode .package-period {
+    color: #a0a0a0;
+}
+.package-features {
+    text-align: left;
+    margin-bottom: 30px;
+}
+.package-features ul {
+    list-style: none;
+}
+.package-features li {
+    padding: 8px 0;
+    display: flex;
+    align-items: center;
+}
+.package-features li i {
+    color: #25d366;
+    margin-right: 10px;
+}
+.view-plans-btn {
+    background: #ffcc00;
+    color: #2575fc;
+    border: none;
+    padding: 12px 30px;
+    border-radius: 5px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.3s;
+    width: 100%;
+    text-decoration: none;
+    display: block;
+}
+.view-plans-btn:hover {
+    background: #1a5fd8;
+    color: white;
+}
+.feature-highlights {
+    padding: 70px 30px;
+    background: #e9ecef;
+    text-align: center;
+    transition: background-color 0.3s;
+}
+body.dark-mode .feature-highlights {
+    background: #252a46;
+}
+.feature-highlights h2 {
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+    color: #1a2a6c;
+}
+body.dark-mode .feature-highlights h2 {
+    color: #4d9aff;
+}
+.feature-highlights p {
+    font-size: 1.1rem;
+    color: #6c757d;
+    margin-bottom: 50px;
+}
+body.dark-mode .feature-highlights p {
+    color: #a0a0a0;
+}
+.features-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+.feature-item {
+    background: #ffffff;
+    padding: 40px 20px;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+body.dark-mode .feature-item {
+    background: #1a1a2e;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+}
+.feature-item:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+}
+.feature-item i {
+    font-size: 3rem;
+    color: #2575fc;
+    margin-bottom: 20px;
+}
+body.dark-mode .feature-item i {
+    color: #4d9aff;
+}
+.feature-item h3 {
+    font-size: 1.5rem;
+    margin-bottom: 15px;
+    color: #1a2a6c;
+}
+body.dark-mode .feature-item h3 {
+    color: #e6e6e6;
+}
+.feature-item p {
+    font-size: 1rem;
+    color: #666;
+    line-height: 1.6;
+}
+body.dark-mode .feature-item p {
+    color: #b0b0b0;
+}
+@media (max-width: 768px) {
+    .features-container {
+        grid-template-columns: 1fr;
+    }
+}
+.bdix-section {
+    padding: 70px 30px;
+    background: #fffffrf;
+    transition: background-color 0.3s;
+}
+body.dark-mode .bdix-section {
+    background: #16213e;
+}
+.bdix-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    gap: 50px;
+    flex-wrap: wrap;
+}
+.bdix-image, .bdix-content {
+    flex: 1;
+    min-width: 300px;
+}
+.bdix-image img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 10px;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+}
+.bdix-content h2 {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+    color: #1a2a6c;
+    font-weight: 700;
+}
+body.dark-mode .bdix-content h2 {
+    color: #4d9aff;
+}
+.bdix-content p {
+    font-size: 1.1rem;
+    margin-bottom: 30px;
+    line-height: 1.7;
+    color: #666;
+}
+body.dark-mode .bdix-content p {
+    color: #b0b0b0;
+}
 
+/* NEW SECTIONS STYLING */
+.technology-section, .faq-section, .ratings-section {
+    padding: 70px 30px;
+    transition: background-color 0.3s;
+}
+.technology-section {
+    background-color: #f8f9fa;
+    text-align: center;
+}
+body.dark-mode .technology-section {
+    background-color: #252a46;
+}
+.technology-section .section-title {
+    font-size: 2.5rem;
+    margin-bottom: 40px;
+    color: #1a2a6c;
+}
+body.dark-mode .technology-section .section-title {
+    color: #e6e6e6;
+}
+.tech-grid {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    flex-wrap: wrap;
+}
+.tech-card {
+    background-color: #ffffff;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, background-color 0.3s;
+    width: 300px;
+}
+body.dark-mode .tech-card {
+    background-color: #1a1a2e;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}
+.tech-card:hover {
+    transform: translateY(-10px);
+}
+.tech-card i {
+    font-size: 3rem;
+    color: #2575fc;
+    margin-bottom: 15px;
+}
+body.dark-mode .tech-card i {
+    color: #4d9aff;
+}
+.tech-card h3 {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+    color: #1a2a6c;
+}
+body.dark-mode .tech-card h3 {
+    color: #e6e6e6;
+}
+.tech-card p {
+    font-size: 1rem;
+    color: #6c757d;
+}
+body.dark-mode .tech-card p {
+    color: #b0b0b0;
+}
+.faq-section {
+    background-color: #ffffff;
+}
+body.dark-mode .faq-section {
+    background-color: #1a1a2e;
+}
+.faq-section .section-title {
+    text-align: center;
+    font-size: 2.5rem;
+    margin-bottom: 40px;
+    color: #1a2a6c;
+}
+body.dark-mode .faq-section .section-title {
+    color: #e6e6e6;
+}
+.faq-container {
+    max-width: 800px;
+    margin: 0 auto;
+}
+.faq-item {
+    border-bottom: 1px solid #dee2e6;
+    margin-bottom: 10px;
+}
+body.dark-mode .faq-item {
+    border-bottom: 1px solid #2d3746;
+}
+.faq-question {
+    background-color: #f1f1f1;
+    color: #343a40;
+    cursor: pointer;
+    padding: 18px;
+    width: 100%;
+    border: none;
+    text-align: left;
+    outline: none;
+    font-size: 1.1rem;
+    transition: background-color 0.3s ease;
+}
+body.dark-mode .faq-question {
+    background-color: #2d3746;
+    color: #e6e6e6;
+}
+.faq-question:hover {
+    background-color: #e2e6ea;
+}
+body.dark-mode .faq-question:hover {
+    background-color: #3b4554;
+}
+.faq-answer {
+    padding: 0 18px;
+    background-color: #f8f9fa;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.2s ease-out;
+}
+body.dark-mode .faq-answer {
+    background-color: #16213e;
+}
+.faq-answer.active {
+    max-height: 200px;
+    padding: 18px;
+}
+.ratings-section {
+    background-color: #e9ecef;
+    text-align: center;
+}
+body.dark-mode .ratings-section {
+    background-color: #252a46;
+}
+.ratings-section .section-title {
+    font-size: 2.5rem;
+    margin-bottom: 40px;
+    color: #1a2a6c;
+}
+body.dark-mode .ratings-section .section-title {
+    color: #e6e6e6;
+}
+.rating-slider {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    flex-wrap: wrap;
+}
+.rating-card {
+    background-color: #ffffff;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    width: 400px;
+}
+body.dark-mode .rating-card {
+    background-color: #1a1a2e;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}
+.rating-card .stars {
+    color: #ffc107;
+    font-size: 1.2rem;
+    margin-bottom: 15px;
+}
+.rating-card p {
+    font-size: 1rem;
+    color: #555;
+    font-style: italic;
+    margin-bottom: 15px;
+}
+body.dark-mode .rating-card p {
+    color: #b0b0b0;
+}
+.rating-card h4 {
+    font-size: 1.1rem;
+    color: #333;
+    font-weight: 600;
+}
+body.dark-mode .rating-card h4 {
+    color: #e6e6e6;
+}
 
-/* ------------------------------------------------------------------ */
-/* *** ফুটার (FOOTER) CSS - অপরিবর্তিত রাখা হয়েছে *** */
-/* ------------------------------------------------------------------ */
+/* OLD FOOTER - Restored with custom copyright */
 .footer {
     background: linear-gradient(135deg, #1a2a6c 0%, #2a4b8d 100%);
     color: white;
@@ -563,8 +1122,9 @@ body.dark-mode .rating-card h4 { color: #e6e6e6; }
 .payment-icons img:hover {
     transform: scale(1.1);
 }
-/* This is the WHMCS copyright section */
-.whmcs-copyright {
+
+/* Custom Copyright Section */
+.custom-copyright {
     text-align: center;
     padding-top: 30px;
     margin-top: 30px;
@@ -572,13 +1132,85 @@ body.dark-mode .rating-card h4 { color: #e6e6e6; }
     font-size: 0.9rem;
     color: rgba(255, 255, 255, 0.7);
 }
-/* --- Media Queries (অপরিবর্তিত) --- */
+
+.custom-copyright a {
+    color: #ffcc00;
+    text-decoration: none;
+}
+
+.custom-copyright a:hover {
+    text-decoration: underline;
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+    .nav-menu {
+        gap: 15px;
+        margin-left: 20px;
+    }
+}
+
+@media (max-width: 768px) {
+    .hamburger {
+        display: flex;
+    }
+    
+    .nav-menu {
+        display: none;
+    }
+    
+    .floating-support {
+        bottom: 20px;
+        right: 20px;
+    }
+    
+    .support-btn {
+        width: 50px;
+        height: 50px;
+        font-size: 1.3rem;
+    }
+    
+    .user-login {
+        display: none;
+    }
+    
+    .theme-switch {
+        width: 50px;
+        height: 26px;
+    }
+    
+    .theme-slider:before {
+        height: 18px;
+        width: 18px;
+        left: 4px;
+        bottom: 4px;
+    }
+    
+    .theme-switch input:checked + .theme-slider:before {
+        transform: translateX(24px);
+    }
+}
+
+@media (max-width: 480px) {
+    .floating-support {
+        bottom: 15px;
+        right: 15px;
+    }
+    
+    .support-btn {
+        width: 45px;
+        height: 45px;
+        font-size: 1.2rem;
+    }
+}
+
 @media(max-width:1200px){
-    .package { width: calc(50% - 30px); max-width: 350px; }
+    .package {
+        width: calc(50% - 30px);
+        max-width: 350px;
+    }
 }
 @media(max-width:768px){
-    /* Hamburger Icon Displayed on small screens */
-    .hamburger-menu-icon { display: block; }
     .new-hero h1 { font-size: 2.2rem; }
     .new-hero h2 { font-size: 1.2rem; }
     .domain-search-form-new { flex-direction: column; background: white; gap: 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); padding: 5px; }
@@ -586,105 +1218,157 @@ body.dark-mode .rating-card h4 { color: #e6e6e6; }
     .domain-search-button-new { border-radius: 6px; }
     .package { width: 100%; max-width: 350px; }
     .package-container { flex-direction: column; align-items: center; }
+    .services-container { flex-direction: column; align-items: center; }
+    .service-column { width: 100%; max-width: 100%; }
     .bdix-container { flex-direction: column; text-align: center; gap: 30px; }
     .bdix-content h2 { font-size: 2rem; }
     .footer-content { grid-template-columns: 1fr; gap: 30px; }
     .hero-buttons { flex-direction: column; gap: 10px; }
     .get-started-btn, .compare-plans-btn { max-width: 100%; }
-    .rating-card { width: 100%; max-width: 350px; }
 }
 @media (max-width: 480px) {
     .payment-icons img { height: 35px; gap: 10px; }
-    .domain-tlds-new { grid-template-columns: repeat(2, 1fr); max-width: 350px; }
+    .domain-tlds-new {
+        grid-template-columns: repeat(2, 1fr); /* 2 columns for smaller screens */
+        max-width: 350px;
+    }
 }
-]]></b:skin>
+</style>
 </head>
 <body>
 
-<header class="top-bar-new">
-    <div class="top-bar-left">
-        <div class="hamburger-menu-icon" id="hamburger-icon">
-            <span></span>
-            <span></span>
-            <span></span>
-        </div>
-
-        <div class="logo">
-            <a href="#home">Miah<span>Host</span></a>
-        </div>
-    </div>
-
-    <div class="top-bar-right">
-        <div class="dark-mode-switch">
-            <i class="fas fa-sun"></i>
-            <label class="switch">
-                <input type="checkbox" id="dark-mode-toggle"/>
-                <span class="slider"></span>
-            </label>
-            <i class="fas fa-moon"></i>
-        </div>
-    </div>
-</header>
-
-<div class="sidebar-new" id="mobile-sidebar">
-    <div class="sidebar-header">
-        <div class="logo">MiahHost</div>
-        <button class="close-btn" id="sidebar-close-btn">&#215;</button>
-    </div>
-    <nav>
-        <ul>
-            <li class="active"><a href="#home"><i class="fas fa-home"></i> HOME</a></li>
-            <li><a href="#packages"><i class="fas fa-list-alt"></i> OUR SERVICES</a></li>
-            <li><a href="https://miahhost.shop/index.php/store/cheap-sheared-hosting"><i class="fas fa-server"></i> HOSTING</a></li>
-            <li><a href="https://miahhost.shop/index.php/store/cheap-reseller-hosting"><i class="fas fa-users"></i> RESELLER HOSTING</a></li>
-            <li><a href="https://miahhost.shop/index.php/store/domain-reseller"><i class="fas fa-globe"></i>RESELLER DOMAIN</a></li>
-            <li><a href="#contact-us"><i class="fas fa-envelope"></i> CONTACT US</a></li>
-        </ul>
-    </nav>
-</div>
-
-<b:section id='main-content' showaddelement='no'>
-
-    <section class="new-hero" id="home">
-            <div class="hero-container">
-                <div class="discount-banner">
-                    <i class="fas fa-bell"></i> 85% Discount first annual purchase
-                </div>
-                <h1>Up To <span class="highlight">50X Faster</span> BDIX Hosting</h1>
-                <h2>Best <span id="typing-words" class="typing-words"></span> provider in Bangladesh.</h2>
-
-                <form action="https://miahhost.shop/domainchecker.php" method="post" class="domain-search-form-new" id="domain">
-                    <input type="hidden" name="action" value="domainchecker"/>
-                    <input type="text" name="domain" class="domain-search-input-new" placeholder="Register a domain name to start"/>
-                    <button type="submit" class="domain-search-button-new"><i class="fas fa-search"></i> Search</button>
-                </form>
-                
-                <div class="domain-tlds-new">
-                    <div class="domain-tld-new">
-                        <span class="tld-name">.com</span>
-                        <span class="tld-price">৳ 1149</span> </div>
-                    <div class="domain-tld-new">
-                        <span class="tld-name">.site</span>
-                        <span class="tld-price">৳ 179</span> </div>
-                    <div class="domain-tld-new">
-                        <span class="tld-name">.shop</span>
-                        <span class="tld-price">৳ 149</span> </div>
-                    <div class="domain-tld-new">
-                        <span class="tld-name">.cyou</span>
-                        <span class="tld-price">৳ 149</span> </div>
-                    <div class="domain-tld-new">
-                        <span class="tld-name">.xyz</span>
-                        <span class="tld-price">৳ 219</span> </div>
-                    <div class="domain-tld-new">
-                        <span class="tld-name">.top</span>
-                        <span class="tld-price">৳ 199</span> </div>
+    <!-- NEW HEADER SECTION -->
+    <header class="header">
+        <div class="header-container">
+            <!-- Logo and Hamburger Menu -->
+            <div class="logo-container">
+                <!-- Mobile Menu Button on LEFT -->
+                <div class="hamburger" id="hamburger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
                 </div>
                 
-                <div class="hero-buttons">
-                    <a href="https://miahhost.shop/index.php/store/cheap-sheared-hosting?currency=1" class="get-started-btn">GET STARTED</a>
-                    <a href="https://miahhost.shop/index.php/store/premium-hosting" class="compare-plans-btn">Compare Plans</a>
+                <!-- Logo with cloud icon -->
+                <a href="/" class="logo">
+                    <i class="fas fa-cloud"></i> MiahHost
+                </a>
+            </div>
+            
+            <!-- Desktop Navigation -->
+            <ul class="nav-menu">
+                <li><a href="#home">HOME</a></li>
+                <li><a href="#packages">OUR SERVICES</a></li>
+                <li><a href="/index.php/store/cheap-sheared-hosting">HOSTING</a></li>
+                <li><a href="/index.php/store/cheap-reseller-hosting">RESELLER HOSTING</a></li>
+                <li><a href="/index.php/store/domain-reseller">RESELLER DOMAIN</a></li>
+                <li><a href="/contact.php">CONTACT US</a></li>
+            </ul>
+            
+            <!-- User Account and Theme Toggle -->
+            <div class="header-right">
+                <!-- User Login Icon - Direct link to login/register -->
+                <div class="user-login">
+                    <a href="/clientarea.php" class="user-login-btn" title="Login / Register">
+                        <i class="fas fa-user"></i>
+                    </a>
+                </div>
+                
+                <!-- Theme Toggle Switch -->
+                <div class="theme-toggle">
+                    <label class="theme-switch">
+                        <input type="checkbox" id="dark-mode-toggle">
+                        <span class="theme-slider">
+                            <i class="fas fa-moon moon-icon"></i>
+                            <i class="fas fa-sun sun-icon"></i>
+                        </span>
+                    </label>
                 </div>
             </div>
+        </div>
+    </header>
+
+    <!-- Mobile Menu Overlay -->
+    <div class="mobile-menu-overlay" id="mobileMenuOverlay"></div>
+    
+    <!-- Mobile Menu Container -->
+    <div class="mobile-menu-container" id="mobileMenuContainer">
+        <div class="mobile-menu-header">
+            <!-- Mobile logo with cloud icon -->
+            <div class="mobile-logo"><i class="fas fa-cloud"></i> MiahHost</div>
+            <button class="mobile-menu-close" id="mobileMenuClose">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        
+        <ul class="mobile-nav-menu">
+            <li><a href="#home">HOME</a></li>
+            <li><a href="#packages">OUR SERVICES</a></li>
+            <li><a href="/index.php/store/cheap-sheared-hosting">HOSTING</a></li>
+            <li><a href="/index.php/store/cheap-reseller-hosting">RESELLER HOSTING</a></li>
+            <li><a href="/index.php/store/domain-reseller">RESELLER DOMAIN</a></li>
+            <li><a href="/contact.php">CONTACT US</a></li>
+        </ul>
+        
+        <div class="mobile-user-account">
+            <a href="/clientarea.php">
+                <i class="fas fa-user"></i> Login / Register
+            </a>
+        </div>
+    </div>
+
+    <!-- Floating Support Buttons (Bottom RIGHT) -->
+    <div class="floating-support">
+        <a href="https://wa.me/8809638730156" target="_blank" class="support-btn whatsapp" title="WhatsApp Support">
+            <i class="fab fa-whatsapp"></i>
+            <span class="support-tooltip">WhatsApp Support</span>
+        </a>
+        <a href="https://t.me/miah_host" target="_blank" class="support-btn telegram" title="Telegram Support">
+            <i class="fab fa-telegram"></i>
+            <span class="support-tooltip">Telegram Support</span>
+        </a>
+    </div>
+
+    <section class="new-hero" id="home">
+        <div class="hero-container">
+            <div class="discount-banner">
+                <i class="fas fa-bell"></i> 85% Discount first annual purchase
+            </div>
+            <h1>Up To <span class="highlight">50X Faster</span> BDIX Hosting</h1>
+            <h2>Best <span id="typing-words" class="typing-words"></span> provider in Bangladesh.</h2>
+
+            <form action="https://miahhost.com/domainchecker.php" method="post" class="domain-search-form-new" id="domain">
+                <input type="hidden" name="action" value="domainchecker">
+                <input type="text" name="domain" class="domain-search-input-new" placeholder="Register a domain name to start">
+                <button type="submit" class="domain-search-button-new"><i class="fas fa-search"></i> Search</button>
+            </form>
+
+            <div class="domain-tlds-new">
+                <div class="domain-tld-new">
+                    <span class="tld-name">.com</span>
+                    <span class="tld-price">৳ 1149</span> </div>
+                <div class="domain-tld-new">
+                    <span class="tld-name">.site</span>
+                    <span class="tld-price">৳ 179</span> </div>
+                <div class="domain-tld-new">
+                    <span class="tld-name">.shop</span>
+                    <span class="tld-price">৳ 149</span> </div>
+                <div class="domain-tld-new">
+                    <span class="tld-name">.cyou</span>
+                    <span class="tld-price">৳ 149</span> </div>
+                <div class="domain-tld-new">
+                    <span class="tld-name">.xyz</span>
+                    <span class="tld-price">৳ 219</span> </div>
+                <div class="domain-tld-new">
+                    <span class="tld-name">.top</span>
+                    <span class="tld-price">৳ 199</span> </div>
+            </div>
+            
+            <div class="hero-buttons">
+                <a href="/index.php/store/cheap-sheared-hosting?currency=1" class="get-started-btn">GET STARTED</a>
+                <a href="/index.php/store/premium-hosting" class="compare-plans-btn">Compare Plans</a>
+            </div>
+        </div>
     </section>
 
     <section class="packages" id="packages">
@@ -693,8 +1377,8 @@ body.dark-mode .rating-card h4 { color: #e6e6e6; }
             <div class="package">
                 <div class="package-header">
                     <h3 class="package-name">Cheap Hosting</h3>
-                    <div class="package-price">৳20</div>
-                    <div class="package-period">Started Per-Month - $ 0.2</div>
+                    <div class="package-price">Started ৳20</div>
+                    <div class="package-period">Per-Month - $ 0.2</div>
                 </div>
                 <div class="package-features">
                     <ul>
@@ -708,14 +1392,14 @@ body.dark-mode .rating-card h4 { color: #e6e6e6; }
                         <li><i class="fas fa-check"></i> LiteSpeed Server</li>
                     </ul>
                 </div>
-                <a href="https://miahhost.shop/index.php/store/cheap-sheared-hosting" class="view-plans-btn">VIEW PLANS</a>
+                <a href="/index.php/store/cheap-sheared-hosting" class="view-plans-btn">VIEW PLANS</a>
             </div>
             
             <div class="package">
                 <div class="package-header">
                     <h3 class="package-name">Premium Hosting</h3>
-                    <div class="package-price">৳50</div>
-                    <div class="package-period">Started Per-Month - $ 0.5</div>
+                    <div class="package-price">Started ৳50</div>
+                    <div class="package-period">Per-Month - $ 0.5</div>
                 </div>
                 <div class="package-features">
                     <ul>
@@ -729,14 +1413,14 @@ body.dark-mode .rating-card h4 { color: #e6e6e6; }
                         <li><i class="fas fa-check"></i> LiteSpeed Server</li>
                     </ul>
                 </div>
-                <a href="https://miahhost.shop/index.php/store/premium-hosting" class="view-plans-btn">VIEW PLANS</a>
+                <a href="/index.php/store/premium-hosting" class="view-plans-btn">VIEW PLANS</a>
             </div>
             
             <div class="package">
                 <div class="package-header">
                     <h3 class="package-name">Cheap Reseller</h3>
-                    <div class="package-price">৳280</div>
-                    <div class="package-period">Started Per-Month - $ 2.8</div>
+                    <div class="package-price">Started ৳280</div>
+                    <div class="package-period">Per-Month - $ 2.8</div>
                 </div>
                 <div class="package-features">
                     <ul>
@@ -750,14 +1434,14 @@ body.dark-mode .rating-card h4 { color: #e6e6e6; }
                         <li><i class="fas fa-check"></i> LiteSpeed Server</li>
                     </ul>
                 </div>
-                <a href="https://miahhost.shop/index.php/store/cheap-reseller-hosting" class="view-plans-btn">VIEW PLANS</a>
+                <a href="/index.php/store/cheap-reseller-hosting" class="view-plans-btn">VIEW PLANS</a>
             </div>
             
             <div class="package">
                 <div class="package-header">
                     <h3 class="package-name">Premium Reseller</h3>
-                    <div class="package-price">৳350</div>
-                    <div class="package-period">Started Per-Month - $ 3.5</div>
+                    <div class="package-price">Started ৳350</div>
+                    <div class="package-period">Per-Month - $ 3.5</div>
                 </div>
                 <div class="package-features">
                     <ul>
@@ -771,7 +1455,7 @@ body.dark-mode .rating-card h4 { color: #e6e6e6; }
                         <li><i class="fas fa-check"></i> LiteSpeed + Caching</li>
                     </ul>
                 </div>
-                <a href="https://miahhost.shop/index.php/store/premium-reseller-hosting" class="view-plans-btn">VIEW PLANS</a>
+                <a href="/index.php/store/premium-reseller-hosting" class="view-plans-btn">VIEW PLANS</a>
             </div>
         </div>
     </section>
@@ -807,7 +1491,7 @@ body.dark-mode .rating-card h4 { color: #e6e6e6; }
             </div>
             <div class="feature-item">
                 <i class="fas fa-cloud-upload-alt"></i>
-                <h3>Free &amp; Easy Migration</h3>
+                <h3>Free & Easy Migration</h3>
                 <p>Transferring your website from another host to our server is very easy and completely free.</p>
             </div>
         </div>
@@ -839,14 +1523,14 @@ body.dark-mode .rating-card h4 { color: #e6e6e6; }
     <section class="bdix-section">
         <div class="bdix-container">
             <div class="bdix-image">
-                <img src="https://i.ibb.co.com/7d4ZjzDg/bdix-hosting.webp" alt="BDIX Hosting in Bangladesh"/>
+                <img src="images/bdix-hosting.png" alt="BDIX Hosting in Bangladesh">
             </div>
             <div class="bdix-content">
                 <h2>Experience Blazing Fast BDIX Speed ⚡</h2>
                 <p>
                     We offer the best BDIX hosting, ensuring the fastest connection for users in Bangladesh. By hosting your website on our BDIX servers, your local visitors will enjoy incredibly low latency and lightning-fast loading times. This improves user experience, boosts your SEO, and retains your visitors. Choose MiahHost for the best BDIX performance!
                 </p>
-                <a href="https://miahhost.shop/index.php/store/bdix-hosting" class="get-started-btn">Explore BDIX Plans</a>
+                <a href="/index.php/store/bdix-hosting" class="get-started-btn">Explore BDIX Plans</a>
             </div>
         </div>
     </section>
@@ -913,33 +1597,35 @@ body.dark-mode .rating-card h4 { color: #e6e6e6; }
         </div>
     </section>
 
-<footer class="footer" id="contact-us">
+<!-- FOOTER -->
+<footer class="footer">
     <div class="footer-content">
         <div class="footer-section">
             <h3>About MiahHost</h3>
             <p>MiahHost is a premium web hosting provider offering reliable, high-performance hosting solutions.</p>
             <div class="social-links">
                 <a href="https://facebook.com/miahhost/"><i class="fab fa-facebook-f"></i></a>
-                <a href="https://x.com/miahrasel819/"><i class="fab fa-twitter"></i></a>
-                <a href="https://Instagram.com/miahrasel819/"><i class="fab fa-instagram"></i></a>
+                <a href="https://x.com/miahhost_com/"><i class="fab fa-twitter"></i></a>
+                <a href="https://Instagram.com/miah.host/"><i class="fab fa-instagram"></i></a>
                 <a href="https://linkedin.com/miahrasel819/"><i class="fab fa-linkedin-in"></i></a>
             </div>
         </div>
         <div class="footer-section">
             <h3>Our Services</h3>
             <ul>
-                <li><a href="https://miahhost.shop/index.php/store/cheap-sheared-hosting">Web Hosting</a></li>
-                <li><a href="https://miahhost.shop/index.php/store/cheap-reseller-hosting">Reseller Hosting</a></li>
-                <li><a href="https://miahhost.shop/index.php/store/domain-reseller">Domain Reseller</a></li>
-                <li><a href="#">SSL Certificates</a></li>
+                <li><a href="/index.php/store/cheap-sheared-hosting">Web Hosting</a></li>
+                <li><a href="/index.php/store/cheap-reseller-hosting">Reseller Hosting</a></li>
+                <li><a href="/cart.php?a=add&domain=register">Domain Registration</a></li>
+                <li><a href="/">SSL Certificates</a></li>
+                <li><a href="/index.php/store/domain-reseller">Domain Reseller</a></li>
             </ul>
         </div>
         <div class="footer-section">
             <h3>Quick Links</h3>
             <ul>
-                <li><a href="https://miahhost.shop">Home</a></li>
-                <li><a href="https://miahhost.shop/index.php/announcements">About Us</a></li>
-                <li><a href="https://miahhost.shop/contact.php">Contact</a></li>
+                <li><a href="/">Home</a></li>
+                <li><a href="/index.php/announcements">About Us</a></li>
+                <li><a href="/contact.php">Contact</a></li>
             </ul>
         </div>
         <div class="footer-section">
@@ -953,169 +1639,121 @@ body.dark-mode .rating-card h4 { color: #e6e6e6; }
     <div class="footer-payment-methods">
         <h4>We Accept</h4>
         <div class="payment-icons">
-            <img src="https://i.ibb.co.com/tpNWtZVT/bkash.webp" alt="Bkash Payment"/>
-            <img src="https://i.ibb.co.com/s7B4gCf/nagad.webp" alt="Nagad Payment"/>
-            <img src="https://i.ibb.co.com/TqHsg75Z/rocket.webp" alt="Rocket Payment"/>
-            <img src="https://i.ibb.co.com/G49bXfN6/dbbl.webp" alt="Upay Payment"/>
-            <img src="https://i.ibb.co.com/sv3DSwsj/visa.png" alt="Visa Card"/>
-            <img src="https://i.ibb.co.com/TxZZ6HdS/mastercard.png" alt="Mastercard"/>
-            <img src="https://i.ibb.co.com/RTLYxfNY/amex.png" alt="American Express"/>
-            <img src="https://i.ibb.co.com/VWrQhDtS/paypal.png" alt="PayPal"/>
+            <img src="images/bkash.png" alt="Bkash Payment">
+            <img src="images/nagad.png" alt="Nagad Payment">
+            <img src="images/rocket.png" alt="Rocket Payment">
+            <img src="images/dbbl.png" alt="Upay Payment">
+            <img src="images/visa.svg" alt="Visa Card">
+            <img src="images/mastercard.svg" alt="Mastercard">
+            <img src="images/amex.svg" alt="American Express">
+            <img src="images/paypal.svg" alt="PayPal">
         </div>
     </div>
     
-    <div class="whmcs-copyright">
-        Copyright © 2025-♾️ MiahHost. All Rights Reserved.
+    <!-- Custom Copyright Section -->
+    <div class="custom-copyright">
+        <p>&copy; 2022-♾ MiahHost - Premium Web Hosting. All Rights Reserved.</p>
+        <p>Designed and Developed by <a href="https://miahhost.com">MiahHost Team</a></p>
+        <p><a href="/privacy-policy">Privacy Policy</a> | <a href="/terms-of-service">Terms of Service</a> | <a href="/refund-policy">Refund Policy</a></p>
     </div>
 </footer>
 
-</b:section>
-<div class="floating-support-buttons">
-    <a href="https://wa.me/8801516545878" class="support-button whatsapp-button" target="_blank">
-        <i class="fab fa-whatsapp"></i>
-    </a>
-    <a href="https://t.me/miahhostsupport" class="support-button telegram-button" target="_blank">
-        <i class="fab fa-telegram-plane"></i>
-    </a>
-</div>
-
-
 <script>
-//<![CDATA[
-// *** JAVASCRIPT FOR DARK MODE AND SIDEBAR TOGGLE ***
-document.addEventListener('DOMContentLoaded', () => {
-    const sidebar = document.getElementById('mobile-sidebar');
-    const hamburgerIcon = document.getElementById('hamburger-icon');
-    const darkModeToggle = document.getElementById('dark-mode-toggle');
-    // নতুন ক্রস বাটন সিলেক্ট করা হলো
-    const sidebarCloseBtn = document.getElementById('sidebar-close-btn'); 
+const typingWordsEl = document.getElementById('typing-words');
+const wordsToType = ['Domain', 'Hosting', 'Reseller', 'Website','BDIX']; 
+let wordIdx = 0;
+let charIdx = 0;
+let isErasing = false;
 
-    // ** 1. Sidebar Toggle Functionality (Hamburger/Close Icons) **
-    function closeSidebar() {
-        sidebar.classList.remove('open');
-        hamburgerIcon.classList.remove('open');
+function typeWords() {
+    if (!typingWordsEl) return;
+    const currentWord = wordsToType[wordIdx];
+    const typeSpeed = 150;
+    const eraseSpeed = 100;
+    const delayBetweenWords = 1500;
+
+    if (isErasing) {
+        typingWordsEl.textContent = currentWord.substring(0, charIdx - 1);
+        charIdx--;
+    } else {
+        typingWordsEl.textContent = currentWord.substring(0, charIdx + 1);
+        charIdx++;
     }
+
+    if (!isErasing && charIdx === currentWord.length) {
+        isErasing = true;
+        setTimeout(typeWords, delayBetweenWords);
+    } else if (isErasing && charIdx === 0) {
+        isErasing = false;
+        wordIdx = (wordIdx + 1) % wordsToType.length;
+        setTimeout(typeWords, typeSpeed);
+    } else {
+        setTimeout(typeWords, isErasing ? eraseSpeed : typeSpeed);
+    }
+}
+
+// Dark Mode Toggle Switch
+const darkModeToggle = document.getElementById('dark-mode-toggle');
+
+function toggleDarkMode() {
+    document.body.classList.toggle('dark-mode');
+    const isDarkMode = document.body.classList.contains('dark-mode');
+    localStorage.setItem('darkMode', isDarkMode);
     
-    function toggleSidebar() {
-        const isOpen = sidebar.classList.toggle('open');
-        hamburgerIcon.classList.toggle('open', isOpen);
-    }
+    // Update switch state
+    darkModeToggle.checked = isDarkMode;
+}
 
-    // Toggle on hamburger click
-    if (hamburgerIcon) {
-        hamburgerIcon.addEventListener('click', toggleSidebar);
-    }
-    
-    // Close on cross button click 
-    if (sidebarCloseBtn) {
-        sidebarCloseBtn.addEventListener('click', closeSidebar);
-    }
-    
-    // Close sidebar when a link is clicked
-    const sidebarLinks = document.querySelectorAll('.sidebar-new nav ul li a');
-    sidebarLinks.forEach(link => {
-        link.addEventListener('click', (e) => {
-            // Check if it's a valid anchor link
-            const targetId = link.getAttribute('href').substring(1);
-            if (targetId) {
-                const targetElement = document.getElementById(targetId);
-                if (targetElement) {
-                    e.preventDefault(); // Prevent default jump
-                    targetElement.scrollIntoView({ behavior: 'smooth' });
-                }
-            }
-            
-            // Close sidebar
-            setTimeout(closeSidebar, 300); 
-        });
-    });
+// Load dark mode preference
+if (localStorage.getItem('darkMode') === 'true') {
+    document.body.classList.add('dark-mode');
+    darkModeToggle.checked = true;
+}
 
-    // ** 2. Dark Mode Toggle Functionality **
-    function toggleDarkMode() {
-        const isDarkMode = document.body.classList.toggle('dark-mode');
-        // Save the state in local storage
-        localStorage.setItem('darkMode', isDarkMode);
-    }
+darkModeToggle.addEventListener('change', toggleDarkMode);
 
-    // Check for saved dark mode preference on load
-    const savedDarkMode = localStorage.getItem('darkMode');
-    if (savedDarkMode === 'true') {
-        document.body.classList.add('dark-mode');
-        if (darkModeToggle) {
-            darkModeToggle.checked = true;
-        }
-    }
+// Mobile Menu Functionality
+const hamburger = document.getElementById('hamburger');
+const mobileMenuOverlay = document.getElementById('mobileMenuOverlay');
+const mobileMenuContainer = document.getElementById('mobileMenuContainer');
+const mobileMenuClose = document.getElementById('mobileMenuClose');
 
-    // Attach event listener to the toggle switch
-    if (darkModeToggle) {
-        darkModeToggle.addEventListener('change', toggleDarkMode);
-    }
-    
-    
-    // *** 3. Typing Effect JAVASCRIPT (অপরিবর্তিত) ***
-    const typingWordsEl = document.getElementById('typing-words');
-    const wordsToType = ['Domain', 'Hosting', 'Reseller', 'Website', 'BDIX']; 
-    let wordIdx = 0;
-    let charIdx = 0;
-    let isErasing = false;
+function openMobileMenu() {
+    mobileMenuOverlay.classList.add('active');
+    mobileMenuContainer.classList.add('active');
+    document.body.style.overflow = 'hidden';
+}
 
-    function typeWords() {
-        if (!typingWordsEl) return;
-        const currentWord = wordsToType[wordIdx];
-        const typeSpeed = 150;
-        const eraseSpeed = 100;
-        const delayBetweenWords = 1500;
+function closeMobileMenu() {
+    mobileMenuOverlay.classList.remove('active');
+    mobileMenuContainer.classList.remove('active');
+    document.body.style.overflow = 'auto';
+}
 
-        if (isErasing) {
-            typingWordsEl.textContent = currentWord.substring(0, charIdx - 1);
-            charIdx--;
-        } else {
-            typingWordsEl.textContent = currentWord.substring(0, charIdx + 1);
-            charIdx++;
-        }
+hamburger.addEventListener('click', openMobileMenu);
+mobileMenuClose.addEventListener('click', closeMobileMenu);
+mobileMenuOverlay.addEventListener('click', closeMobileMenu);
 
-        if (!isErasing && charIdx === currentWord.length) {
-            isErasing = true;
-            setTimeout(typeWords, delayBetweenWords);
-        } else if (isErasing && charIdx === 0) {
-            isErasing = false;
-            wordIdx = (wordIdx + 1) % wordsToType.length;
-            setTimeout(typeWords, typeSpeed);
-        } else {
-            setTimeout(typeWords, isErasing ? eraseSpeed : typeSpeed);
-        }
-    }
+// Close menu when clicking on links
+const mobileMenuLinks = document.querySelectorAll('.mobile-nav-menu a, .mobile-user-account a');
+mobileMenuLinks.forEach(link => {
+    link.addEventListener('click', closeMobileMenu);
+});
 
-    // Initial call to start the typing effect
-    setTimeout(typeWords, 1000);
-
-
-    // FAQ Section (MaxHeight লজিক - অপরিবর্তিত)
-    const questions = document.querySelectorAll('.faq-question');
-    questions.forEach(question => {
-        question.addEventListener('click', () => {
-            const answer = question.nextElementSibling;
-            
-            // Close other open answers
-            document.querySelectorAll('.faq-answer.active').forEach(otherAnswer => {
-                if (otherAnswer !== answer) {
-                    otherAnswer.style.maxHeight = null;
-                    otherAnswer.classList.remove('active');
-                }
-            });
-
-            // Toggle current answer
-            if (answer.style.maxHeight) {
-                answer.style.maxHeight = null;
-                answer.classList.remove('active');
-            } else {
-                answer.style.maxHeight = answer.scrollHeight + "px";
-                answer.classList.add('active');
-            }
-        });
+// FAQ functionality
+const questions = document.querySelectorAll('.faq-question');
+questions.forEach(question => {
+    question.addEventListener('click', () => {
+        const answer = question.nextElementSibling;
+        answer.classList.toggle('active');
     });
 });
-//]]>
+
+// Initialize on load
+window.onload = function() {
+    setTimeout(typeWords, 1000);
+};
 </script>
+
 </body>
 </html>
